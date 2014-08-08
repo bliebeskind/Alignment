@@ -29,6 +29,12 @@ class Alignment:
 		domains = domain_chop.get_domains(self.records,cut_list)
 		return domains
 		
+	def num_pairwise(self):
+		'''Return the number of possible non-self pairwise comparisons 
+		for the alignment'''
+		func = lambda x: sum([x-i for i in range(1,x)])
+		return func(len(self.records))
+		
 	def print_domains(self,oufile,cut_list,format='fasta'):
 		'''Write a file of the constituent domains contained in alignment.
 		These will be ungapped, and be renamed: Seq1_D1, Seq1_D2 etc.'''
