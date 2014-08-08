@@ -1,4 +1,5 @@
 from Bio import SeqIO, AlignIO
+import sys
 import domain_chop
 #import open_reading_frame
 
@@ -7,6 +8,8 @@ class Alignment:
 	Manipulations for alignments. Reads in an alignment as a list of
 	BioPython SeqRecord objects. Most functions are currently for comparing
 	hamming distances between sequences in the alignment.
+	
+	Requires domain_chop in PhyloPreprocessing
 	'''
 	
 	def __init__(self,alignment,format='fasta'):
@@ -95,7 +98,7 @@ class Alignment:
 		for seq1,seq2,dist in self.hamming_dists(no_gaps):
 			num_comparisons +=1
 			if num_comparisons % 100 == 0:
-				print "%i pairwise comparisons completed" % num_comparisons
+				sys.stderr.write("%i pairwise comparisons completed\n" % num_comparisons)
 			if dist <= threshold:
 				#print "%s and %s below threshold" % (seq1.id, seq2.id)
 				func = lambda x,y: x.id if \
@@ -115,7 +118,7 @@ class Alignment:
 		longest sequences for each such group, and sequences which are not in
 		these groups.
 		'''
-		print "Making all-by-all comparisons"
+		sys.stderr.write("Making all-by-all comparisons\n")
 		shorts = self.find_shorts_hamming(threshold,no_gaps)
 		for i in self.records:
 			if i.id not in shorts:
