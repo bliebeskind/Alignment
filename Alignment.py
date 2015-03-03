@@ -1,6 +1,7 @@
-from Bio import SeqIO, AlignIO
+from Bio import SeqIO, AlignIO, Align
 import sys
 import domain_chop
+from collections import Counter
 #import open_reading_frame
 
 class Alignment:
@@ -137,3 +138,24 @@ class Alignment:
 				yield i
 			else:
 				print "%s has been trimmed" % (i.id)
+				
+	def column_counter(self,gaps=True):
+		assert isinstance(self.records,Align.MultipleSeqAlignment), "Must load alignment with as_seq=False"
+		for i in range(len(self.records[1,:])):
+			if gaps:
+				yield Counter(self.records[:,i])
+			else:
+				yield Counter(self.records[:,i].replace('-',''))
+			
+	def column_freqs(self,gaps=True,as_dict=False):
+		for i in self.column_counter(gaps):
+			total = float(sum(i.values()))
+			if as_dict:
+				yield dict(Counter({i:j/total for i,j in i.iteritems()}))
+			else:	
+				yield Counter({i:j/total for i,j in i.iteritems()})
+			
+	def column_freqs_dict(self,gaps=True,as_dict=False):
+		return {i:j for i,j in enumerate(self.column_freqs(gaps,as_dict))}
+			
+			
