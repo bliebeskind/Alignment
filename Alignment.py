@@ -12,14 +12,20 @@ class Alignment:
 	Requires domain_chop in PhyloPreprocessing
 	'''
 	
-	def __init__(self,alignment,format='fasta'):
+	def __init__(self,alignment,format='fasta',as_seqs=True):
 		self.records = None
-		self._load(alignment,format)
+		self._load(alignment,format,as_seqs)
 
-	def _load(self, infile,format='fasta'):
-		'''Load alignment as list of SeqRecord objects. Called automatically
-		upon initialization, but can be recalled to replace current alignment'''
-		self.records = [i for i in SeqIO.parse(infile,format)]
+	def _load(self, infile,format='fasta',as_seqs=True):
+		'''If as_seqs, load alignment as list of SeqRecord objects. 
+		Else, load as an AlignIO object.
+		
+		Called automatically upon initialization, but can be 
+		called again to replace current alignment'''
+		if as_seqs:
+			self.records = [i for i in SeqIO.parse(infile,format)]
+		else:
+			self.records = AlignIO.read(infile,format)
 		
 	def as_dict(self):
 		'''Return a dictionary with IDs as keys and sequences as values'''
