@@ -158,4 +158,6 @@ class Alignment:
 	def column_freqs_dict(self,gaps=True,as_dict=False):
 		return {i:j for i,j in enumerate(self.column_freqs(gaps,as_dict))}
 			
-			
+	def num_combinations(self,gaps=True,as_dict=False):
+		return reduce(lambda x,y:x*y,
+			[len(i) for i in self.column_freqs_dict(gaps,as_dict).values()])
