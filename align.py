@@ -1,9 +1,9 @@
-from Bio import SeqIO, AlignIO, Align
+from Bio import SeqIO, AlignIO
 import sys
 import domain_chop
 #import open_reading_frame
 
-class Alignment:
+class Align:
 	'''
 	Manipulations for alignments. Most functions are currently for comparing
 	hamming distances between sequences in the alignment.

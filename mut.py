@@ -1,6 +1,6 @@
 from collections import Counter
-from alignment import Alignment
-from Bio import SeqIO, AlignIO, Align
+from alignment import Align
+from Bio import SeqIO, AlignIO
 
 class Mut(Alignment):
 
