@@ -6,18 +6,17 @@ from collections import Counter
 
 class Alignment:
 	'''
-	Manipulations for alignments. Reads in an alignment as a list of
-	BioPython SeqRecord objects. Most functions are currently for comparing
+	Manipulations for alignments. Most functions are currently for comparing
 	hamming distances between sequences in the alignment.
 	
 	Requires domain_chop in PhyloPreprocessing
 	'''
 	
-	def __init__(self,alignment,format='fasta',as_seqs=True):
+	def __init__(self,alignment,format='fasta',as_seqs=False):
 		self.records = None
-		self._load(alignment,format,as_seqs)
+		self.load(alignment,format,as_seqs)
 
-	def _load(self, infile,format='fasta',as_seqs=True):
+	def load(self, infile,format='fasta',as_seqs=False):
 		'''If as_seqs, load alignment as list of SeqRecord objects. 
 		Else, load as an AlignIO object.
 		
