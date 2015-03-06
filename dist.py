@@ -1,7 +1,7 @@
-from alignment import Align
+from align import Align
 from Bio import SeqIO, AlignIO
 
-class Dist(Alignment):
+class Dist(Align):
 
 	def __init__(self,alignment,format='fasta',as_seqs=False):
 		self.records = None

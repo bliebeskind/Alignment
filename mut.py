@@ -1,8 +1,8 @@
 from collections import Counter
-from alignment import Align
+from align import Align
 from Bio import SeqIO, AlignIO
 
-class Mut(Alignment):
+class Mut(Align):
 
 	def __init__(self,alignment,format='fasta',as_seqs=False):
 		self.records = None

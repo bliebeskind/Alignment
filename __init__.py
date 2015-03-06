@@ -1,3 +1,3 @@
-from Alignment.alignment import Alignment
+from Alignment.align import Align
 from Alignment.dist import Dist
 from Alignment.mut import Mut
