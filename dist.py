@@ -1,5 +1,6 @@
 from align import Align
 from Bio import SeqIO, AlignIO
+import Bio.Align
 
 class Dist(Align):
 

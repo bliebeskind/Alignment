@@ -1,8 +1,13 @@
 from collections import Counter
 from align import Align
 from Bio import SeqIO, AlignIO
+import Bio.Align
 
 class Mut(Align):
+	'''
+	Functions for creating mutagenic primer libraries from 
+	multiple sequence alignments
+	'''
 
 	def __init__(self,alignment,format='fasta',as_seqs=False):
 		self.records = None
@@ -10,7 +15,7 @@ class Mut(Align):
 	
 	def column_counter(self,gaps=True):
 		'''Generator of Counter objects for amino acids in each column'''
-		assert isinstance(self.records,Align.MultipleSeqAlignment), "Must load alignment with as_seq=False"
+		assert isinstance(self.records,Bio.Align.MultipleSeqAlignment), "Must load alignment with as_seq=False"
 		for i in range(len(self.records[1,:])):
 			if gaps:
 				yield Counter(self.records[:,i])
