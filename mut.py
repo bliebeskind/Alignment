@@ -72,7 +72,6 @@ class Mut(Align):
 		'''Load a DNA consensus sequence'''
 		self.consensus = SeqIO.read(infile,format)
 		
-	def _codon_gen(self,infile=None,format=None):
-		if self.consensus == None:
-			self.load_consensus(infile,format)
-		return (str(self.consensus.seq[i:i+3]) for i in range(0,len(self.consensus),3))
+	def _codon_gen(self,inseq):
+		'''Return generator of codons given a Bio.SeqRecord object'''
+		return (str(inseq.seq[i:i+3]) for i in range(0,len(inseq),3))
